@@ -8,3 +8,7 @@ Get the dates from the table element
 Convert date strings into date format
 
 Calculate dates
+
+
+
+![alt text](https://github.com/flaciGit/Diablo3SeasonDateCalculatorWithASPNETCore/blob/master/img/pic.png?raw=true)
