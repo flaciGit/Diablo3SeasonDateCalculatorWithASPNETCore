@@ -1,0 +1,145 @@
+﻿@{
+    ViewData["Title"] = "Diablo 3 Season duration statistics";
+}
+
+<div class="text-center" style="margin-top:20px">
+    <h1 class="display-4">Diablo 3 Season duration statistics</h1>
+    @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+</div>
+</br>
+
+@*<div>@ViewBag.HtmlContentResult</div>*@
+
+@*<div>@ViewBag.ContentArray</div>*@
+
+
+
+
+<table class="table table-striped">
+    <tr>
+        <td>Average Season Length (days):</td>
+        <td>@Html.Raw(ViewBag.AverageSeasonLength)</td>
+    </tr>
+    <tr>
+        <td>Average Days Between Seasons:</td>
+        <td>@Html.Raw(ViewBag.AverageBetweenLength)</td>
+    </tr>
+    @if (ViewBag.CalculatedSeasonStart1 != null)
+    {
+        <tr>
+            <td>Calculated Season Start Date (+5 days):</td>
+            <td>@Html.Raw(ViewBag.CalculatedSeasonStart1)</td>
+        </tr>
+    }
+    @if (ViewBag.CalculatedSeasonStart2 != null)
+    {
+        <tr>
+            <td>Calculated Season Start Date (+average days):</td>
+            <td>@Html.Raw(ViewBag.CalculatedSeasonStart2)</td>
+        </tr>
+    }
+    @if (ViewBag.CalculatedSeasonEnd1 != null)
+    {
+        <tr>
+            <td>Calculated Season End Date (+90 days):</td>
+            <td>@Html.Raw(ViewBag.CalculatedSeasonEnd1)</td>
+        </tr>
+    }
+    @if (ViewBag.CalculatedSeasonEnd2 != null)
+    {
+        <tr>
+            <td>Calculated Season End Date (+average days):</td>
+            <td>@Html.Raw(ViewBag.CalculatedSeasonEnd2)</td>
+        </tr>
+    }
+</table>
+
+</br>
+
+<table class="table table-striped">
+
+    <thead>
+        <tr class="tableheadrow">
+            <th style="text-align:left;">
+                #
+            </th>
+            <th style="text-align:center;">
+                Start Date
+            </th>
+            <th style="text-align:center;">
+                End Date
+            </th>
+            <th style="text-align:right;">
+                Season Duration (days)
+            </th>
+            <th style="text-align:right;">
+                Time between seasons (days)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+
+        @for (var i = 0; i < ViewBag.StartDateArray.Count; i++)
+        {
+
+            @:<tr>
+                <td style="text-align:left;">
+                    @Html.Raw(i + 1)
+                </td>
+                <td style="text-align:center;">
+                    @Html.Raw(ViewBag.StartDateArray[i])
+                </td>
+                if (i < ViewBag.EndDateArray.Count)
+                {
+                    <td style="text-align:center;">
+                        @Html.Raw(ViewBag.EndDateArray[i])
+                    </td>
+                }
+                else
+                {
+                    <td style="text-align:center;"></td>
+                }
+                if (i < ViewBag.DayArray.Count)
+                {
+                    <td style="text-align:right;">
+                        @Html.Raw(ViewBag.DayArray[i])
+                    </td>
+                }
+                else
+                {
+                    <td style="text-align:right;"></td>
+                }
+                if (i < ViewBag.BetweenArray.Count)
+                {
+                    <td style="text-align:right;">
+                        @Html.Raw(ViewBag.BetweenArray[i])
+                    </td>
+                }
+                else
+                {
+                    <td style="text-align:right;"></td>
+                }
+            @:</tr>
+        }
+    </tbody>
+</table>
+
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            $('tr:not(.tableheadrow)').hover(function () {
+                $(this).toggleClass('tablerow',1000);
+
+            });
+
+
+
+        });
+    </script>
+}
